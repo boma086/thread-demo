@@ -3,7 +3,7 @@ package com.example.demo.volatiledemo;
 import java.util.concurrent.TimeUnit;
 
 public class OriginalTest {
-	//来源：https://blog.csdn.net/J169YBZ/article/details/119151121
+	// 来源：https://blog.csdn.net/J169YBZ/article/details/119151121
 	public static void main(String[] args) {
 
 //		extractedvolatile(shop);
@@ -14,19 +14,20 @@ public class OriginalTest {
 	}
 
 	private static void extractedatomicity(Shop shop) {
-		for(int i = 0; i < 20;i++){
-	            new Thread(()->{
-	                shop.addGoods();
-	            }).start();
-	        }
-			
-			//保证所有20个线程都跑完，只剩下2个线程（主线程和GC线程）的时候代码才继续往下走
-			//其中 Thread.yield() 方法表示主线程不执行，让给其他线程执行
-	        while (Thread.activeCount() >2){
-	            Thread.yield();
-	        }
+		for (int i = 0; i < 200; i++) {
+			new Thread(() -> {
+				shop.addGoods();
+			}).start();
+		}
 
-	        System.out.println("如果保证了原子性，应该的结果是本来的1+20 = 21，但实际的值："+shop.a);
+		// 保证所有20个线程都跑完，只剩下2个线程（主线程和GC线程）的时候代码才继续往下走
+		// 其中 Thread.yield() 方法表示主线程不执行，让给其他线程执行
+		while (Thread.activeCount() > 2) {
+			Thread.yield();
+		}
+		if (shop.a < 200 || shop.a == 201) {
+			System.out.println("如果保证了原子性，应该的结果是本来的1+20 = 21，但实际的值：" + shop.a);
+		}
 	}
 
 	private static void extractedvolatile(Shop shop) {
