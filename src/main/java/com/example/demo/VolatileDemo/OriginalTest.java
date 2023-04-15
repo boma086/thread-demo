@@ -1,4 +1,4 @@
-package com.example.demo.volatiledemo;
+package com.example.demo.VolatileDemo;
 
 import java.util.concurrent.TimeUnit;
 
