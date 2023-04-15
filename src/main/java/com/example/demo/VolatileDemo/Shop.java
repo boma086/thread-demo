@@ -1,4 +1,4 @@
-package com.example.demo.volatiledemo;
+package com.example.demo.VolatileDemo;
 public class Shop{
 //	int a = 1;
 	volatile int a = 1;
