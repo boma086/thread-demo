@@ -7,7 +7,7 @@ public class InvokeAllExample {
         ExecutorService executorService = Executors.newFixedThreadPool(10);
         Callable<String> task1 = () -> {
             Thread.sleep(2000);
-            return "Result of Task1";
+            return "Result  of Task1";
         };
         Callable<String> task2 = () -> {
             Thread.sleep(1000);
